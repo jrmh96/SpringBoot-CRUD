@@ -24,13 +24,15 @@
     </head>
 
     <body>
-    <form role="form" method="post" th:action="@{/checklogin}" th:object="${user}">
+    <form method="post" th:action="@{/checklogin}" th:object="${user}">
         <h1>Login Page</h1>
     <div class="col-xs-6">
+    
         <label for="username">Username: </label>
-        <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{userName}"/>
+        <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}"/>
 
         <br/>
+        
         <div class="form-group">
             <label for="password">Password: </label>
             <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
@@ -38,6 +40,7 @@
 
         <br/><br/>
 	    <button type="submit" class="btn btn-default">Login</button>
+	
 	</div>
     </form>
     </body>

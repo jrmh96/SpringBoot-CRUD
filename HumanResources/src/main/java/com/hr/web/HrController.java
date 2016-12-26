@@ -8,14 +8,31 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.stereotype.Controller;
 
-import com.hr.dto.*;
+import com.hr.dto.DepartmentDTO;
+import com.hr.dto.EmployeeDTO;
+import com.hr.dto.JobDTO;
+import com.hr.dto.UserDTO;
+import com.hr.dto.UserSessionBean;
 import com.hr.model.Employees;
 import com.hr.model.Job;
-import com.hr.service.*;
+import com.hr.service.DepartmentService;
+import com.hr.service.EmployeeService;
+import com.hr.service.MiscService;
+import com.hr.service.UserService;
 
-public class Controller {
+//must finish adding gson data 
+//to render the table
+
+import com.google.common.collect.Lists;
+import com.google.gson.Gson;
+
+@Controller
+public class HrController {
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
@@ -23,11 +40,11 @@ public class Controller {
 	@Autowired
 	private DepartmentService deptServ;
 	@Autowired
-	private UserService userService;
+	private UserService UserService;
 	@Autowired
 	private UserSessionBean currentUser;
 	
-	@RequestMapping("/login")
+	@RequestMapping(value="/login")
 	String login(Model model){
 		return "login";
 	}
@@ -35,7 +52,9 @@ public class Controller {
 	@RequestMapping("/checklogin")
 	String checkLogin(@ModelAttribute("user") UserDTO current, BindingResult b, Model model) throws ParseException{
 		//try to return a user dto object from back end given the password and username
-		UserDTO newDTO = userService.getUser(current.getUsername(), current.getPassword());
+		String u = current.getUsername();
+		String p = current.getPassword();
+		UserDTO newDTO = UserService.getUser(current.getUsername(), current.getPassword());
 		if(newDTO != null){
 			this.currentUser.setUsername(current.getUsername());
 			this.currentUser.setPassword(current.getPassword());
@@ -43,17 +62,48 @@ public class Controller {
 		else{
 			return "login";
 		}
-		return "redirect: /table";
+		return "redirect:/table";
 	}
+	
+	@ModelAttribute("user")
+	 public UserDTO getUserDto() {
+		 return new UserDTO();
+	 }
 	
 	@RequestMapping("/")
 	String index(Model model){
-		return "redirect :/table";
+		return "redirect:/table";
 	}
 	
 	@RequestMapping("/table")
 	String read(Model model){
-		return "datatable";
+		return "table";
+	}
+	
+	@RequestMapping("/getAll")
+	@ResponseBody
+	public String getAllEmployees(){
+		List<EmployeeDTO> list = Lists.newArrayList();
+		for(Employees e : employeeService.getAll()){
+			EmployeeDTO edto = new EmployeeDTO();
+			if(e.getDepartment()!=null){
+				edto.setDepartmentID(e.getDepartment().getDepartmentId());
+			}
+			else{
+				edto.setDepartmentID((long)000);
+			}
+				edto.setFirstName(e.getFirstName());
+				edto.setLastName(e.getLastName());
+				edto.setJobTitle(e.getJob().getJobTitle());
+				edto.setDeleteLink("<a href='/delete?id=" + edto.getID()+ "' " 
+				+"class='btn btn-danger'>Delete</a>");
+				edto.setUpdateLink("<a href='/update?id=" + edto.getID()+ "' "
+						+ "class='btn btn-success'>Update</a>");
+				list.add(edto);		
+		}
+		
+		String jsonString = new Gson().toJson(list);
+		return jsonString;
 	}
 	
 	@RequestMapping("/create-new")
@@ -92,7 +142,6 @@ public class Controller {
 	
 	@RequestMapping("/update")
 	String update(Model model, @ModelAttribute EmployeeDTO dto, BindingResult br){
-		
 		return "update";
 	}
 	@RequestMapping("/delete")
@@ -108,5 +157,4 @@ public class Controller {
 		this.currentUser.setUsername(null);
 		return "redirect:/login";
 	}
-	
 }

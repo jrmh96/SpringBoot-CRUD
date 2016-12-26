@@ -3,6 +3,8 @@ package com.hr.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hr.model.Department;
@@ -10,6 +12,7 @@ import com.hr.model.Employees;
 
 import com.hr.dao.EmployeeRepo;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Autowired

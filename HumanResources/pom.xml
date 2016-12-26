@@ -3,14 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<name>HumanResources</name>
-	<description>Demo project for Spring Boot</description>
 	
 	<groupId>HR</groupId>
 	<artifactId>HumanResources</artifactId>
 	<version>1.0</version>
-	
-	<packaging>war</packaging>
+	<name>spring-boot-thymeleaf</name>
+	<packaging>jar</packaging>
 	
 	
 	<properties>
@@ -142,7 +140,7 @@
 				<version>1.4.3.RELEASE</version>
 				
 				<configuration>
-					<mainClass> com.hr.HumanResourcesApplication </mainClass>
+					<mainClass>com.hr.HumanResourcesApplication</mainClass>
 					<layout>ZIP</layout>
 				</configuration>
 				

@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.hr.dto.*;
 
+@Repository
 public class MiscDao {
 	
-	private static final String GET_USERS = "SELECT ID, USERNAME, EMAIL, PASSWORD FROM "
-			+ "hr.USERS WHERE USERNAME=? + PASSWORD=?";
+	private static final String GET_USERS = "SELECT USERNAME, PASSWORD FROM "
+			+ "hr.HR_USERS WHERE USERNAME=? AND PASSWORD=?";
 	
 	private static final String GET_JOBS = "SELECT JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY "
 			+ "FROM hr.JOBS";
