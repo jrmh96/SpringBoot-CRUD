@@ -1,6 +1,7 @@
 package com.hr.dto;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class EmployeeDTO implements Comparable<EmployeeDTO>{
 	private Long ID;
@@ -8,7 +9,7 @@ public class EmployeeDTO implements Comparable<EmployeeDTO>{
 	private String lastName;
 	private String email;
 	private String phoneNumber;
-	private String hireDate;
+	private Date hireDate;
 	private String jobID;
 	private String jobTitle;
 	private BigDecimal salary;
@@ -48,10 +49,10 @@ public class EmployeeDTO implements Comparable<EmployeeDTO>{
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getHireDate() {
+	public Date getHireDate() {
 		return hireDate;
 	}
-	public void setHireDate(String hireDate) {
+	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
 	}
 	public String getJobID() {

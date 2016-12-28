@@ -37,13 +37,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public void deleteEmployee(Employees emp) {
 		empRepo.delete(emp);
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public void deleteEmployee(Long ID) {
 		//  Auto-generated method stub
 		if(ID==null){
@@ -54,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional
 	public Employees saveOrUpdate(Employees e) {
 		return empRepo.save(e);
 	}

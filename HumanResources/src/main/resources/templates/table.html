@@ -1,61 +1,43 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}" 
+    <title>Hello Spring Boot!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link 
+          th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
           rel="stylesheet" media="screen" />
-
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
-	
-	<script
-  src="https://code.jquery.com/jquery-2.2.1.min.js"
-  integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-  crossorigin="anonymous"></script>
-	
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
-	
-<script>
-$(function(){
-	$('#hrtable').Datatable({
-
-	sAjaxSource: '/getAll',
-		"columns": [
-			{"data":"firstName"},
-			{"data":"lastName"},
-			{"data":"jobTitle"},
-			{"data":"departmentID"},
-			{"data":"updateLink"},
-			{"data":"deleteLink"}
-		]
-	});
-
-});
-</script>
+    <link href="../static/css/core.css"
+          th:href="@{/css/core.css}"
+          rel="stylesheet" media="screen" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript"
+            th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/datatables/1.10.11/js/jquery.dataTables.min.js}"></script>
+    <!-- ../static/js/functions.js -->
+    <script th:src="@{/js/functions.js}"></script>
 
 </head>
-
 <body>
-    
-    <div class="container">
-    
-        <h2>TABLE OF EMPLOYEES</h2>
-        <div style="text-align:right"><a th:href="@{/create-new}" class="btn btn-success">Create New Employee</a>
-        <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
-        </div>
-        <br/>
-    
-    <table id="hrtable" class="display">
-        <thead><tr>
-            <td>First Name</td>
-            <td>Last Name</td>
-    		<td>Job Title</td>
-    		<td>Department ID</td>
+<div><header>HR CRUD Application</header></div><br/><br/><br/>
+
+<div class="container">
+    <h2>Gizmo &amp; Mario Corp. Human Resources</h2>
+    <div style="text-align:right"><a th:href="@{/hr}" class="btn btn-success">Create New Employee</a>
+    <a th:href="@{/logout}" class="btn btn-default btn-md"><span class="glyphicon glyphicon-log-out"></span>Logout</a></div><br/>
+    <table id="hr-table" class="display" >
+    	 <thead><tr>
+    		<td>First Name</td>
+    		<td>Last Name</td>
+    		<td>Job</td>
+    		<td>Hire Date</td>
+    		<td>Department</td>
     		<td>Update</td>
     		<td>Delete</td>
-            </tr></thead>
-
-    </table>
-    
-    </div>
-
+    	</tr></thead>
+    	
+    </table>    	
+</div>
+<footer><div th:replace="fragments/footer :: footer"></div></footer>
 </body>
 </html>

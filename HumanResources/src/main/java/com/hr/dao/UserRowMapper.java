@@ -13,7 +13,7 @@ public class UserRowMapper implements RowMapper<UserDTO>{
 		UserDTO user = new UserDTO();
 		user.setUsername(rs.getString("USERNAME"));
 		user.setPassword(rs.getString("PASSWORD"));
-		return null;
+		return user;
 	}
 	
 }

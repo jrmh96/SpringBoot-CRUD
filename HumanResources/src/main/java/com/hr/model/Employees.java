@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name="EMPLOYEES")
@@ -20,7 +21,7 @@ public class Employees {
 	private String lastName;
 	private String email;
 	private String phoneNumber;
-	private String hireDate;
+	private Date hireDate;
 	private BigDecimal salary;
 	private BigDecimal CommissionPercent;
 	private Employees manager;
@@ -28,8 +29,6 @@ public class Employees {
 	private Job job;
 	
 
-
-	
 	@Column(name="FIRST_NAME")
 	public String getFirstName(){
 		return firstName;
@@ -63,11 +62,11 @@ public class Employees {
 	}
 	
 	@Column(name="HIRE_DATE")
-	public String getHireDate(){
+	public Date getHireDate(){
 		return this.hireDate;
 	}
 	
-	public void setHireDate(String hD){
+	public void setHireDate(Date hD){
 		this.hireDate=hD;
 	}
 		

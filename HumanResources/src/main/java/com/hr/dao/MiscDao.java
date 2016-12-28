@@ -17,7 +17,7 @@ public class MiscDao {
 	private static final String GET_JOBS = "SELECT JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY "
 			+ "FROM hr.JOBS";
 	
-	private static final String GET_DEPARTMENTS = "SELECT DEPARTMENT_ID, DEPARTMENT_NAME, LOCATION_ID, MANAGER_ID";
+	private static final String GET_DEPARTMENTS = "SELECT DEPARTMENT_ID, DEPARTMENT_NAME, LOCATION_ID, MANAGER_ID FROM hr.DEPARTMENTS";
 	
 	private static final String GET_JOB_BY_ID = "SELECT JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY FROM hr.JOBS where job_id = ?";
 	

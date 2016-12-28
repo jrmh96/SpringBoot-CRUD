@@ -7,10 +7,6 @@
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
           rel="stylesheet" media="screen" />
-    <!-- import core.css library -->      
-    <link href="../static/css/core.css"
-          th:href="@{/css/core.css}"
-          rel="stylesheet" media="screen" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/>
@@ -44,14 +40,14 @@ function validateForm(){
         alert("Last name should be less than 23 characters");
     }
     alert('Submit new user?');
-    $('form').submit();
+    $('#form').submit();
 }
 </script>
 
 </head>
 
 <body>
-    <form autocomplete="off" th:action="@{/create}" id="form" th:object="*{employee}">
+    <form autocomplete="off" method="post" th:object="${employee}" th:action="@{/create}" id="form">
     
     <h1>New Employee Form</h1>
     <div class="col-xs-6">
@@ -72,22 +68,26 @@ function validateForm(){
         </div>         
        
         <p> Department <select name="Department" th:field="*{departmentID}">
-            <option th:each = "department : *{departments}" th:value="department.DepartmentID" th:text="department.deptName"/>
+            <option th:each = "department : ${departments}" th:value="${department.DepartmentID}" th:text="${department.deptName}"/>
             </select>
         </p>
 
-        <p> Job Title <select name="Job Title" th:field="*{jobId}">
-            <option th:each ="job : *{jobs}" th:value="job.jobID" th:text="job.jobName"/>    
+        <p> Job Title <select name="Job Title" th:field="*{jobID}">
+            <option th:each ="job : ${jobs}" th:value="${job.jobID}" th:text="${job.JobTitle}"/>    
         </select>
         </p>
-
-        <div>
-        <button class="btn btn-success" value="Submit" id="submit">Submit</button>
-        <button class="btn btn-primary" value="Reset" id="reset">Reset</button>
-
-        <div align="right">
+        
+		<br/>
+		<br/>
+		<div align="right">
             <a class="btn btn-danger" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a>
         </div>
 
+      </div>
+        <button class="btn btn-success" value="Submit" id="submit">Submit</button>
+        <button class="btn btn-primary" value="Reset" id="reset">Reset</button>
+
         </form>
 </body>
+
+</html>

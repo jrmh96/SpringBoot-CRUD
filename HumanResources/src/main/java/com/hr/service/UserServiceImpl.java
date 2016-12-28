@@ -18,7 +18,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional(readOnly=true)
 	public UserDTO getUser(String userName, String password) {
-
 		UserDTO p= m.getUser(userName, password);
 		return p;
 	}
